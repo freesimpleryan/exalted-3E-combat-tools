@@ -18,15 +18,6 @@ var testToon = {
 var Combatants = [];
 Combatants.push(testToon);
 
-var combatantmenu = function(){
-	if(this.text != "New Combatant"){
-			alert(this.text);
-		}
-		else{
-			alert(this.text);
-		}
-};
-
 function initiativesort(a, b){
 	return parseInt($(b).find(".initiative").val()) > parseInt($(a).find(".initiative").val()) ? 1 : -1;
 }
@@ -39,13 +30,30 @@ $(document).ready(function(){
 	});
 	
 	$('#btn-add-combatant').on('click', function(){
-		var newcombatant = '<li class="combatant"><span class="btn btn-default combatant-btn" href="#" role="button"><input type="checkbox"><span class="combatant-name">New Combatant</span><input type="number" class="initiative" style="width:40px;"><span class="glyphicon glyphicon-trash combatant-delete" aria-hidden="true"></span></span></li>';
-
+		var newcombatant = '<li class="combatant"><span class="btn btn-default combatant-btn"><input type="checkbox"><span class="combatant-name">New Combatant</span><input type="number" class="initiative" style="width:40px;"><span class="glyphicon glyphicon-trash combatant-delete" aria-hidden="true"></span></span></li>';
 		$('#combatants').append(newcombatant);
 		
+		// Listeners
 		// Name change
 		$('#combatants li').last().find('.combatant-name').on('click', function(){
-			alert("NAME");
+			if(!$(this).hasClass('editable')){
+				var temp = $(this).text;
+				var placeholder = "New Combatant";
+				$(this).empty();
+				if($(this).val())
+					placeholder = temp;
+				var textbox = '<input type="text" class="combatant-name-field" value="'+placeholder+'">';
+				$(this).append(textbox);
+				$(this).addClass('editable');
+				$(this).find('.combatant-name').focus();
+				// Set on focusout
+				$('#combatants li').last().find('.combatant-name-field').on("focusout", function(){
+						var temp = $(this).val();
+						$(this).closest('span').removeClass('editable');
+						$(this).closest('span').text(temp);
+						$(this).remove();
+				});
+			}
 		});
 		
 		// Delete button
@@ -59,7 +67,5 @@ $(document).ready(function(){
 		revert: true,
 		items: "li"
 	});
-	$('#combatants').disableSelection();
-	
 	
 });

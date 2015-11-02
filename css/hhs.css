@@ -12,3 +12,16 @@
 #combatants-control{
 	list-style: none;
 }
+
+.combatant-name{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.initiative{
+	margin-right: 5px;
+}
+
+.combatant-name-field{
+	width: 6em;
+}

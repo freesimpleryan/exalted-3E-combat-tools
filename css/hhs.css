@@ -1,0 +1,14 @@
+.combatant-btn{
+	margin: 5px;
+	padding: 5px;
+	width: 200px;
+	cursor: pointer;
+}
+
+#combatants{
+	list-style: none;
+}
+
+#combatants-control{
+	list-style: none;
+}

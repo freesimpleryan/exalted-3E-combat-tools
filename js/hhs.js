@@ -24,6 +24,35 @@ function initiativesort(a, b){
 
 $(document).ready(function(){
 	
+	// RANGE BANDS
+	$('#btn-new-icon').on('click', function(){
+		var playername = $('#icon-name').val();
+		if(!playername)
+			playername = "New Character";
+		var player = '<div class="player-circle"><p class="icon-text">'+playername+'</p></div>';
+		$('#range-bands-map').append(player);
+		
+		var icon = $('#range-bands-map div').last();
+		icon.draggable({containment: "#range-bands-map", scroll: false});
+		
+		icon.on("click", function(){
+			if($(this).hasClass("showall")){
+				$(this).removeClass("showall");
+			}
+			else{
+				$(this).addClass("showall");
+			}
+		});
+		
+		$('#icon-name').val('');
+	});
+	
+	
+	
+	
+	// END RANGE BANDS
+	
+	// INITIATIVE TRACKER
 	$('#btn-new-turn').on('click', function(){
 		$('.combatant').sort(initiativesort).appendTo('#combatants');
 		$('#combatants :checkbox').attr('checked', false);
@@ -67,5 +96,6 @@ $(document).ready(function(){
 		revert: true,
 		items: "li"
 	});
+	// END INITIATIVE TRACKER
 	
 });

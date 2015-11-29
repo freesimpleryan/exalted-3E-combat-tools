@@ -18,6 +18,8 @@ var testToon = {
 var Combatants = [];
 Combatants.push(testToon);
 
+var toggleRange = false;
+
 function initiativesort(a, b){
 	return parseInt($(b).find(".initiative").val()) > parseInt($(a).find(".initiative").val()) ? 1 : -1;
 }
@@ -25,6 +27,7 @@ function initiativesort(a, b){
 $(document).ready(function(){
 	
 	// RANGE BANDS
+	// Add Combatant
 	$('#btn-new-icon').on('click', function(){
 		var playername = $('#icon-name').val();
 		if(!playername)
@@ -33,22 +36,39 @@ $(document).ready(function(){
 		$('#range-bands-map').append(player);
 		
 		var icon = $('#range-bands-map div').last();
-		icon.draggable({containment: "#range-bands-map", scroll: false});
+		icon.wrap('<div class="eng transparent"></div>');
+		
+		var layer = icon.parent();
+		layer.wrap('<div class="cls transparent"></div>');
+		layer = layer.parent();
+		layer.wrap('<div class="short transparent"></div>');
+		layer = layer.parent();
+		layer.wrap('<div class="med transparent"></div>');
+		layer = layer.parent();
+		layer.wrap('<div class="long transparent"></div>');
+		layer = layer.parent();
+		layer.wrap('<div class="extreme transparent"></div>');
+		layer.parent().draggable({scroll: false, handle: icon});
+		
+		layer.parent().css({position: "absolute", top: "-500", left: "-500"});
 		
 		icon.on("click", function(){
-			if($(this).hasClass("showall")){
-				$(this).removeClass("showall");
-			}
-			else{
-				$(this).addClass("showall");
-			}
+			//layer.parent().draggable("option", "zIndex", 100);
 		});
 		
 		$('#icon-name').val('');
 	});
 	
-	
-	
+	$('#btn-toggle-range').on('click', function(){
+		if(toggleRange){
+			showRangeBands();
+			toggleRange = false;
+		}
+		else{
+			hideRangeBands();
+			toggleRange=true;
+		}
+	});
 	
 	// END RANGE BANDS
 	
@@ -99,3 +119,22 @@ $(document).ready(function(){
 	// END INITIATIVE TRACKER
 	
 });
+
+
+
+
+var showRangeBands = function(){
+	$("div").each(function(index, element){
+		if($(this).hasClass("transparent")){
+			$(this).css("background-color", "rgba(0, 0, 0, 0.1)");
+		}
+	})
+};
+
+var hideRangeBands = function(){
+	$("div").each(function(index, element){
+		if($(this).hasClass("transparent")){
+			$(this).css("background-color", "rgba(0, 0, 0, 0)");
+		}
+	})
+};

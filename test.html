@@ -1,0 +1,66 @@
+<html>
+<head>
+<style>
+
+.large{
+	background-color: green;
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	opacity: 0.5;
+}
+
+.med{
+	background-color: yellow;
+	width: 50px;
+	height: 50px;
+	margin-left: 25px;
+	margin-top: 25px;
+	display: inline-block;
+	opacity: 0.5;
+}
+
+.small{
+	background-color: red;
+	width: 25px;
+	height: 25px;
+	margin-left: 12.5px;
+	margin-top: 12.5px;
+}
+
+</style>
+
+</head>
+<body>
+
+<button onclick="toggle()">Toggle</button><br></br>
+
+<div id="wrapper"><div class="large"><div class="med"><div class="small"></div></div></div></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+
+var t = true;
+var pos;
+
+var toggle = function(){
+	if(t){
+		$('.large').hide();
+		$('.med').hide();
+		$('#wrapper').append('<div class="small" id="tmp"></div>');
+		$('#tmp').css("margin-top", "37.5px");
+		$('#tmp').css("margin-left", "37.5px");
+		t = false;
+	}
+	else{
+		$('div:last').remove();
+		$('.large').show();
+		$('.med').show();
+		t = true;
+	}
+};
+
+</script>
+</body>
+</html>

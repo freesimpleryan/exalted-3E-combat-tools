@@ -31,21 +31,116 @@
 	height: 100%;
 	border:2px solid #ccc;
 	padding: 10px;
+	user-select: none;
 }
 
 .player-circle{
 	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	background-color: #99CCFF;
+	width: 40px;
+	height: 40px;
+	background: rgba(113, 193, 197, 1);
 	text-align: center;
+	margin-left: 40px;
+	margin-top: 40px;
+	cursor: pointer;
+	pointer-events: all;
+	user-select: none;
 }
 
 .icon-text{
-	max-width: 50px;
-	max-height: 50px;
+	font-size: 10px;
+	user-select: none;
 }
 
-.showall{
-	
+/*
+1) Enganged, 1 Range Band 
+distance = player-circle.width * (total bands + 2)
+*/
+
+.eng{
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+	margin-left: 40px;
+	margin-top: 40px;
+}
+
+/*
+2) Close, 1 Range band 
+2 total
+*/
+.cls{
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+	margin-left: 80px;
+	margin-top: 80px;
+}
+
+/*
+3) Short, 2 Range bands (10 units) 
+4 total
+*/
+.short{
+	border-radius: 50%;
+	width: 360px;
+	height: 360px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+	margin-left: 120px;
+	margin-top: 120px;
+}
+
+/*
+4) Medium, 3 Range Bands (15 units)
+7 total
+*/
+.med{
+	border-radius: 50%;
+	width: 600px;
+	height: 600px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+	margin-top: 160px;
+	margin-left: 160px;
+}
+
+/*
+5) Long, 4 Range Bands (20 units)
+11 total
+*/
+.long{
+	border-radius: 50%;
+	width: 920px;
+	height: 920px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+	margin-top: 210px;
+	margin-left: 210px;
+}
+
+/*
+6) Extreme, 5 Range bands (25 units)
+16 total
+*/
+.extreme{
+	border-radius: 50%;
+	width: 1320px;
+	height: 1320px;
+	display: inline-block;
+	user-select: none;
+	pointer-events: none;
+}
+
+.transparent{
+	background-color: rgba(0, 0, 0, 0.1);
 }

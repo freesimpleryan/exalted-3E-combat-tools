@@ -49,7 +49,8 @@ $(document).ready(function(){
 		layer = layer.parent();
 		layer.wrap('<div class="extreme transparent"></div>');
 		layer.parent().draggable({scroll: false, handle: icon});
-		
+		hideRangeBands();
+		toggleRange = true;
 		layer.parent().css({position: "absolute", top: "-500", left: "-500"});
 		
 		icon.on("click", function(){

@@ -20,6 +20,8 @@ Combatants.push(testToon);
 
 var toggleRange = false;
 
+var BANDS = ["eng", "cls", "short", "med", "long", "extreme"];
+
 function initiativesort(a, b){
 	return parseInt($(b).find(".initiative").val()) > parseInt($(a).find(".initiative").val()) ? 1 : -1;
 }
@@ -52,9 +54,11 @@ $(document).ready(function(){
 		hideRangeBands();
 		toggleRange = true;
 		layer.parent().css({position: "absolute", top: "-500", left: "-500"});
+		var rangeBand = $('#range-selector').val();
+		setRangeBandMin(rangeBand);
 		
 		icon.on("click", function(){
-			//layer.parent().draggable("option", "zIndex", 100);
+			// TODO: Something
 		});
 		
 		$('#icon-name').val('');
@@ -69,6 +73,18 @@ $(document).ready(function(){
 			hideRangeBands();
 			toggleRange=true;
 		}
+	});
+	
+	// Range Toggle
+	//Setup
+	for(var i = 0; i < BANDS.length; i++){
+		$('#range-selector').append('<option value="'+BANDS[i]+'">'+BANDS[i]+'</option>');
+	}
+	
+	// Listener
+	$('#range-selector').change(function(){
+		var rangeBand = $('#range-selector').val();
+		setRangeBandMin(rangeBand);
 	});
 	
 	// END RANGE BANDS
@@ -122,20 +138,42 @@ $(document).ready(function(){
 });
 
 
-
+var setRangeBandMin = function(minBand){
+	var rangeBand = $('#range-selector').val();
+	var rangeValue = BANDS.indexOf(rangeBand);
+	
+	for(var i = rangeValue; i < BANDS.length; i++){
+		$("div").each(function(index, element){
+			if($(this).hasClass(BANDS[i])){
+				$(this).css("background-color", "rgba(0, 0, 0, 0)");
+			}
+		})
+	}
+	showRangeBands();
+};
 
 var showRangeBands = function(){
-	$("div").each(function(index, element){
-		if($(this).hasClass("transparent")){
-			$(this).css("background-color", "rgba(0, 0, 0, 0.1)");
-		}
-	})
+	var rangeBand = $('#range-selector').val();
+	var rangeValue = BANDS.indexOf(rangeBand);
+	
+	for(var i = rangeValue; i >= 0; i--){
+		$("div").each(function(index, element){
+			if($(this).hasClass(BANDS[i])){
+				$(this).css("background-color", "rgba(0, 0, 0, 0.1)");
+			}
+		})
+	}
 };
 
 var hideRangeBands = function(){
-	$("div").each(function(index, element){
-		if($(this).hasClass("transparent")){
-			$(this).css("background-color", "rgba(0, 0, 0, 0)");
-		}
-	})
+	var rangeBand = $('#range-selector').val();
+	var rangeValue = BANDS.indexOf(rangeBand);
+	
+	for(var i = rangeValue; i >= 0; i--){
+		$("div").each(function(index, element){
+			if($(this).hasClass(BANDS[i])){
+				$(this).css("background-color", "rgba(0, 0, 0, 0)");
+			}
+		})
+	}
 };
